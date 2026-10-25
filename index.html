@@ -1,190 +1,392 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-hero="a">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>wml — próximamente</title>
-<meta name="description" content="IA aplicada a negocios reales. Sitio en construcción.">
-<meta name="theme-color" content="#000000">
-<meta property="og:title" content="wml — próximamente">
-<meta property="og:description" content="IA aplicada a negocios reales. Sitio en construcción.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asesoría de IA y automatización para negocios | WMLab</title>
+<meta name="description" content="Desde Colombia, mido cuánto te cuesta una tarea y te digo si conviene IA, software o quitar pasos. Si conviene, construyo la solución y te enseño a usarla.">
+<meta name="theme-color" content="#FBFBFB">
+
+<!-- Tarjeta para compartir (V2): cambiar título, texto e imagen cuando estén listos -->
 <meta property="og:type" content="website">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000'/%3E%3Crect x='6' y='9' width='20' height='2' fill='%23fff' opacity='.35'/%3E%3Crect x='6' y='14' width='20' height='6' fill='%235C5BEE'/%3E%3Crect x='6' y='20' width='9' height='3' fill='%23EEFF22'/%3E%3C/svg%3E">
+<meta property="og:locale" content="es_CO">
+<meta property="og:site_name" content="WMLab">
+<meta property="og:title" content="Asesoría de IA y automatización para negocios | WMLab">
+<meta property="og:description" content="Desde Colombia, mido cuánto te cuesta una tarea y te digo si conviene IA, software o quitar pasos. Si conviene, construyo la solución y te enseño a usarla.">
+<!-- <meta property="og:image" content="/img/compartir.png"> -->
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
-<style>
-  /* ── STRATA tokens ───────────────────────────── */
-  :root {
-    --black:  #000000;          /* 60 · dominante */
-    --white:  #FFFFFF;          /* 30 · texto */
-    --purple: #5C5BEE;          /* acento editorial */
-    --yellow: #EEFF22;          /* 10 · chispa */
-    --deep:   #0E0D30;          /* morado profundo, base de la textura */
-    --mute:   rgba(255,255,255,.56);
-    --gutter: clamp(16px, 5vw, 64px);
-    --sans:  "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    --serif: "Newsreader", Georgia, "Times New Roman", serif;
-    --ease:  cubic-bezier(.2,.7,.2,1);
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    position: relative;
-    min-height: 100vh;
-    min-height: 100svh;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    background: var(--black);
-    color: var(--white);
-    font-family: var(--sans);
-    -webkit-font-smoothing: antialiased;
-    overflow: hidden;
-  }
-
-  ::selection { background: var(--yellow); color: var(--black); }
-
-  /* ── Cabecera ────────────────────────────────── */
-  header {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: var(--gutter) var(--gutter) 0;
-  }
-  .mark {
-    font-weight: 600;
-    font-size: 1.375rem;
-    letter-spacing: -.045em;
-  }
-  .meta {
-    font-size: .75rem;
-    letter-spacing: .08em;
-    color: var(--mute);
-    font-variant-numeric: tabular-nums;
-  }
-
-  /* ── Mensaje ─────────────────────────────────── */
-  main {
-    position: relative;
-    z-index: 2;
-    align-self: center;
-    padding: 0 var(--gutter);
-    margin-bottom: 22vh;            /* sube el bloque para que flote sobre la textura */
-    animation: rise 1.1s var(--ease) both;
-  }
-  h1 {
-    font-weight: 500;
-    font-size: clamp(3.25rem, 13vw, 12.5rem);
-    line-height: .9;
-    letter-spacing: -.06em;
-    margin-left: -.04em;            /* compensa el lado izquierdo de la "p" a gran tamaño */
-  }
-  .dot {
-    display: inline-block;
-    width: .13em; height: .13em;
-    margin-left: .05em;
-    border-radius: 50%;
-    background: var(--yellow);
-    animation: pulse 2.6s ease-in-out infinite;
-  }
-  .tagline {
-    margin-top: clamp(16px, 2.4vw, 32px);
-    font-size: clamp(1.375rem, 3.2vw, 2.75rem);
-    line-height: 1.15;
-    letter-spacing: -.03em;
-    font-weight: 400;
-  }
-  .tagline em {
-    font-family: var(--serif);
-    font-style: italic;
-    letter-spacing: -.01em;
-    color: var(--purple);
-  }
-
-  /* ── Profundidad: textura que sube desde abajo ── */
-  .depth {
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    height: 46vh;
-    height: 46svh;
-    z-index: 1;
-    pointer-events: none;
-    background: linear-gradient(to top, var(--deep) 0%, rgba(18,17,58,.5) 40%, transparent 85%);
-    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 22%, rgba(0,0,0,.5) 58%, transparent 100%);
-            mask-image: linear-gradient(to top, #000 0%, #000 22%, rgba(0,0,0,.5) 58%, transparent 100%);
-  }
-  .layer {
-    position: absolute;
-    top: 0; bottom: 0;
-    left: -15%;
-    width: 130%;
-    will-change: transform;
-  }
-  .layer svg { display: block; width: 100%; height: 100%; }
-  .far  { animation: drift 40s ease-in-out infinite alternate; }
-  .near { animation: drift 28s ease-in-out infinite alternate-reverse; opacity: .85; }
-
-  .grain {
-    position: absolute;
-    inset: -20% 0 0 0;
-    opacity: .55;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-    background-size: 220px 220px;
-  }
-
-  /* ── Movimiento ──────────────────────────────── */
-  @keyframes rise  { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  @keyframes drift { from { transform: translateX(-5%); } to { transform: translateX(5%); } }
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(238,255,34,.45); }
-    50%      { box-shadow: 0 0 0 .08em rgba(238,255,34,0); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation: none !important; }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/styles.css">
+<script>
+  /* Versión del hero: ?hero=a, ?hero=b o ?hero=c (sirve para la prueba de cinco segundos) */
+  (function () {
+    var v = new URLSearchParams(location.search).get("hero");
+    if (v === "a" || v === "b" || v === "c") document.documentElement.setAttribute("data-hero", v);
+  })();
+</script>
 </head>
 <body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
 
-  <header>
-    <span class="mark">wml</span>
-    <span class="meta">2026</span>
-  </header>
-
-  <main>
-    <h1>próximamente<span class="dot" aria-hidden="true"></span></h1>
-    <p class="tagline">IA aplicada <em>a negocios reales.</em></p>
-  </main>
-
-  <div class="depth" aria-hidden="true">
-    <!-- capa lejana: vetas moradas, desenfoque horizontal fuerte -->
-    <div class="layer far">
-      <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <filter id="farF" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.0014 0.016" numOctaves="3" seed="7"/>
-          <feColorMatrix type="matrix" values="0 0 0 0 0.36  0 0 0 0 0.357  0 0 0 0 0.933  2.4 0 0 0 -1.05"/>
-          <feGaussianBlur stdDeviation="48 9"/>
-        </filter>
-        <rect width="100%" height="100%" filter="url(#farF)"/>
-      </svg>
-    </div>
-    <!-- capa cercana: destellos lavanda, se mueve en sentido contrario -->
-    <div class="layer near">
-      <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <filter id="nearF" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.0024 0.028" numOctaves="3" seed="23"/>
-          <feColorMatrix type="matrix" values="0 0 0 0 0.76  0 0 0 0 0.76  0 0 0 0 1  3.2 0 0 0 -1.9"/>
-          <feGaussianBlur stdDeviation="60 6"/>
-        </filter>
-        <rect width="100%" height="100%" filter="url(#nearF)"/>
-      </svg>
-    </div>
-    <!-- grano tipo película, encima de todo -->
-    <div class="grain"></div>
+<!-- 01 · MENÚ -->
+<header class="site-head">
+  <div class="wrap head-row">
+    <a class="wordmark" href="/" aria-label="WMLab, inicio">WMLab</a>
+    <nav class="nav" aria-label="Principal">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">Menú</button>
+      <ul class="nav-list" id="nav-list">
+        <li><a href="#proceso">Cómo trabajo</a></li>
+        <li><a href="#casos">Casos</a></li>
+        <li><a href="/proximamente/">Clases</a></li>
+        <li><a href="/proximamente/">Lab</a></li>
+      </ul>
+    </nav>
+    <button class="btn btn-primary btn-sm" type="button" data-open-selector>
+      <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+      Cuéntame tu caso
+    </button>
   </div>
+</header>
 
+<main id="contenido">
+
+  <!-- 02 · HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-art" data-halftone="hero" data-src="/img/hero.webp" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <div class="hero-v" data-v="a">
+          <h1 class="display" id="hero-title">Esa tarea que te come horas cada semana quizá no tengas que seguir haciéndola a mano.</h1>
+          <p class="subtitle">Mido cuánto tiempo te cuesta y te digo si vale la pena automatizarla. Si vale, construyo la solución y te enseño a usarla. No tienes que aprender a programar.</p>
+        </div>
+        <div class="hero-v" data-v="b">
+          <h1 class="display">¿Esto lo puedo hacer con IA? Te respondo con números antes de construir nada.</h1>
+          <p class="subtitle">Reviso tu tarea, mido cuánto tiempo te cuesta y te digo qué conviene: IA, un software sencillo o quitar los pasos que sobran. Construyo solo lo que vale la pena y te enseño a usarlo.</p>
+        </div>
+        <div class="hero-v" data-v="c">
+          <h1 class="display">Cinco minutos por tarea, 300 veces al mes, son 281 horas al año.</h1>
+          <p class="subtitle">Así crece una tarea pequeña que se repite. Calcula la tuya aquí abajo y te digo qué conviene hacer con ella.</p>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" type="button" data-open-selector>
+            <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+            Cuéntame tu caso
+          </button>
+          <a class="btn btn-secondary" href="#proceso">Mira cómo trabajo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · FRANJA DE CLASES -->
+  <aside class="band" aria-label="Clases de IA">
+    <div class="wrap band-inner">
+      <p>¿Vienes por las clases de IA? Son 5 sesiones de una hora y media.</p>
+      <a class="btn btn-secondary" href="/proximamente/">Ver las clases</a>
+    </div>
+  </aside>
+
+  <!-- 04 · LO QUE ESTÁ EN JUEGO + CALCULADORA -->
+  <section class="sec" id="calculadora" aria-labelledby="calc-title">
+    <div class="wrap calc-grid">
+      <div class="calc-intro">
+        <h2 class="h2 tone" id="calc-title">Antes de buscar una solución, <span class="key">mide el problema.</span></h2>
+        <p class="lead">Muchas veces la tarea que molesta esconde otra cosa: pasos que sobran o datos que se copian a mano de un lado a otro. Empieza por el tiempo. Cambia el ejemplo por tu tarea y mira cuánto suma en un año.</p>
+      </div>
+
+      <form class="calc" id="calc" novalidate>
+        <div class="field" data-field="tarea">
+          <label for="c-tarea">¿Qué tarea repites?</label>
+          <div class="control"><input id="c-tarea" name="tarea" type="text" autocomplete="off" value="Revisar y responder el correo" aria-describedby="c-tarea-help"></div>
+          <p class="help" id="c-tarea-help" data-help="Cámbiala por la tuya, escrita como si la hicieras una vez.">Cámbiala por la tuya, escrita como si la hicieras una vez.</p>
+        </div>
+
+        <div class="calc-pair">
+          <div class="field" data-field="tiempo">
+            <label for="c-tiempo">¿Cuánto tarda hacerla una vez?</label>
+            <div class="control">
+              <input id="c-tiempo" name="tiempo" type="text" inputmode="decimal" autocomplete="off" value="40" aria-describedby="c-tiempo-help">
+              <select id="c-unidad" name="unidad" aria-label="Unidad de tiempo">
+                <option value="min" selected>minutos</option>
+                <option value="h">horas</option>
+              </select>
+            </div>
+            <p class="help" id="c-tiempo-help" data-help="Un cálculo aproximado sirve.">Un cálculo aproximado sirve.</p>
+          </div>
+
+          <div class="field" data-field="veces">
+            <label for="c-veces">¿Cuántas veces la haces?</label>
+            <div class="control">
+              <input id="c-veces" name="veces" type="text" inputmode="decimal" autocomplete="off" value="1" aria-describedby="c-veces-help">
+              <select id="c-frecuencia" name="frecuencia" aria-label="Frecuencia">
+                <option value="dia" selected>al día</option>
+                <option value="semana">a la semana</option>
+                <option value="mes">al mes</option>
+              </select>
+            </div>
+            <p class="help" id="c-veces-help" data-help="Si la hacen varias personas, suma las veces de todas.">Si la hacen varias personas, suma las veces de todas.</p>
+          </div>
+        </div>
+
+        <div class="result">
+          <p class="result-line" id="c-result" aria-live="polite">Revisar y responder el correo: 40 minutos por vez, 1 al día, son <strong>151 horas al año</strong>. Unos 18 días de trabajo.</p>
+          <p>Ese es el costo en tiempo. Los pasos de más, los errores y la información repartida en varios lugares también cuestan, y eso aparece cuando me cuentas el caso.</p>
+          <div class="actions">
+            <a class="btn btn-primary" id="c-wa" href="#" data-wa target="_blank" rel="noopener">
+              <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+              Cuéntame tu caso
+            </a>
+            <button class="link-btn" type="button" id="c-reset">Volver al ejemplo</button>
+          </div>
+          <p class="note">Se abre WhatsApp con tu cálculo escrito. Completa la última línea y envíalo.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- 05 · ¿IA, SOFTWARE O QUITAR PASOS? -->
+  <section class="sec sec-alt" aria-labelledby="paths-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="h2" id="paths-title">“Quiero saber si esto lo puedo hacer con IA.”</h2>
+        <p class="lead">Es la pregunta que más me hacen. Antes de responderla, reviso qué problema hay detrás de la tarea. Según eso, elijo uno de estos tres caminos:</p>
+      </div>
+      <div class="cols-3">
+        <article class="card">
+          <h3>IA</h3>
+          <p>Cuando la tarea exige leer, comparar o evaluar textos que cambian cada vez.</p>
+          <p><span class="label">Ejemplo real</span><br>Un equipo de reclutamiento revisaba a mano cada hoja de vida contra la descripción del cargo. Configuré un asistente de IA que hace esa primera evaluación.</p>
+          <a class="text-link" href="#casos">Ver el caso →</a>
+        </article>
+        <article class="card">
+          <h3>Software sencillo</h3>
+          <p>Cuando los pasos son siempre los mismos y las reglas no cambian.</p>
+          <p><span class="label">Ejemplo real</span><br>Un abogado de derechos de autor buscaba a mano los datos de cada canción. Lo resolví con una automatización en Google Sheets, sin IA.</p>
+          <a class="text-link" href="#casos">Ver el caso →</a>
+        </article>
+        <article class="card">
+          <h3>Quitar antes de construir</h3>
+          <p>Cuando un paso de la tarea sobra. Lo último que hago es automatizar: primero reviso si cada paso es necesario, quito los que no lo son y simplifico los que quedan.</p>
+          <p><span class="label">Cómo saberlo</span><br>Si la calculadora te da pocas horas al año pero la tarea igual te pesa, el problema está en otra capa. Ahí busco la causa que no se ve antes de proponer nada.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · PROCESO -->
+  <section class="sec" id="proceso" aria-labelledby="proc-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="h2" id="proc-title">Cómo trabajo</h2>
+        <p class="lead">Es un solo proceso en tres fases, y en todas te acompaño como asesor. Cada problema tiene sus particularidades, así que el camino se ajusta a tu caso.</p>
+      </div>
+      <p class="callout"><span class="label">Antes de empezar</span><br>Una conversación por WhatsApp, sin costo. Me cuentas tu caso, te ubico en contexto y los dos vemos si tiene sentido seguir.</p>
+
+      <ol class="cols-3 phases">
+        <li class="card phase">
+          <span class="label">1 / 3</span>
+          <h3>Diagnóstico</h3>
+          <dl>
+            <div><dt>Qué pasa</dt><dd>Nos reunimos una o dos veces para entender cómo se hace hoy la tarea. Puedes mostrármela en vivo por videollamada, pasarme un diagrama o dejar que yo recorra los pasos. Después trabajo por mi cuenta: investigo, pruebo y mido cuánto tiempo cuesta.</dd></div>
+            <div><dt>Qué recibes</dt><dd>Un documento con lo que encontré: el problema de fondo, la primera solución que conviene probar y los otros sistemas que se cruzan con la tarea y pueden complicarla.</dd></div>
+            <div><dt>Duración</dt><dd>4 días hábiles después de la última reunión.</dd></div>
+            <div><dt>Precio</dt><dd><strong>400.000 COP, precio fijo.</strong> Las condiciones te las explico en la conversación de apertura.</dd></div>
+          </dl>
+        </li>
+        <li class="card phase">
+          <span class="label">2 / 3</span>
+          <h3>Construcción</h3>
+          <dl>
+            <div><dt>Qué pasa</dt><dd>Según el caso, trabajo de una de dos formas.
+              <br><br><strong>Construyo contigo:</strong> tú o tu equipo me dan material, ejemplos y criterios, y probamos cada versión juntos. Así fue con el asistente de IA para reclutamiento.
+              <br><br><strong>Construyo por mi cuenta:</strong> tú me explicas el problema y te muestro la solución funcionando en una demostración. Así fue con la automatización para el abogado.
+              <br><br>En los dos casos la ajustamos en sesiones de revisión hasta que funcione como la necesitas.</dd></div>
+            <div><dt>Qué recibes</dt><dd>La solución funcionando en tu negocio. Puede ser una aplicación, una automatización o un asistente de IA.</dd></div>
+            <div><dt>Duración</dt><dd>Desde 15 días hábiles, según la complejidad. Un asistente de IA puede quedar cerca del mínimo; una aplicación que pasa por varias versiones puede tomar cerca de dos meses.</dd></div>
+            <div><dt>Precio</dt><dd><strong>Desde 1.200.000 COP.</strong> Después del diagnóstico te doy un precio cerrado, antes de empezar.</dd></div>
+          </dl>
+        </li>
+        <li class="card phase">
+          <span class="label">3 / 3</span>
+          <h3>Formación</h3>
+          <dl>
+            <div><dt>Qué pasa</dt><dd>En sesiones por videollamada te enseño a ti y a tu equipo cómo funciona la solución y cómo usarla en el día a día. Después quedan días de revisión para afinar lo que haga falta.</dd></div>
+            <div><dt>Qué recibes</dt><dd>Saber usar lo que construí, tú o quien lo vaya a manejar, y mi acompañamiento en esos días de revisión.</dd></div>
+            <div><dt>Duración</dt><dd>Depende de la solución.</dd></div>
+            <div><dt>Precio</dt><dd><strong>Incluida en la construcción.</strong></dd></div>
+          </dl>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 07 · CASOS -->
+  <section class="sec sec-alt" id="casos" aria-labelledby="cases-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="h2" id="cases-title">Antes y después</h2>
+        <p class="lead">Dos proyectos reales: uno se resolvió con IA y el otro sin ella.</p>
+      </div>
+      <div class="cols-2">
+        <article class="card case">
+          <!-- PENDIENTE C4: cuando tengas el nombre, cambia la línea de abajo por «Nombre del abogado o firma, abogado de derechos de autor» -->
+          <h3>Abogado de derechos de autor</h3>
+          <dl>
+            <div><dt>Antes</dt><dd>Buscaba a mano los datos de cada canción en bases de datos públicas. Eran de 3 a 7 minutos por canción, así que una lista de 30 tomaba entre hora y media y tres horas y media. Un catálogo grande podía llegar a 12 horas.</dd></div>
+            <div><dt>Qué hice</dt><dd>Probé un robot en Python y después IA. Una de las fuentes no permitía extraer datos de forma automática, así que cambié el enfoque: construí una automatización en Google Sheets que trae los datos de la fuente principal y deja listo el enlace de búsqueda para la otra. Tomó cerca de dos meses y varias versiones.</dd></div>
+            <div class="after"><dt>Después</dt><dd>La misma lista de 30 canciones toma alrededor de 2 minutos.</dd></div>
+          </dl>
+          <!-- PENDIENTE C4: testimonio. Quita los comentarios y pega el texto:
+          <blockquote class="quote"><p>«Testimonio»</p></blockquote>
+          -->
+        </article>
+        <article class="card case">
+          <h3>Equipo de reclutamiento</h3>
+          <dl>
+            <div><dt>Antes</dt><dd>Cada hoja de vida pasaba por dos personas. Una la leía contra la descripción del cargo y la otra verificaba su revisión. El proceso tomaba horas.</dd></div>
+            <div><dt>Qué hice</dt><dd>Construí con el equipo un asistente de IA. Ellos aportaron material y ejemplos, y lo ajustamos en sesiones de prueba.</dd></div>
+            <div class="after"><dt>Después</dt><dd>La revisión toma 30 minutos o menos, y cada candidato llega con un porcentaje de encaje con el cargo.</dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · QUIÉN SOY -->
+  <section class="sec" aria-labelledby="about-title">
+    <div class="wrap about-grid">
+      <figure class="portrait" data-halftone="portrait" data-src="/img/quien-soy.webp" data-alt="Santiago, fundador de WMLab"></figure>
+      <div class="about-copy">
+        <h2 class="h2" id="about-title">Quién soy</h2>
+        <!-- PENDIENTE C5: cuando tengas el nombre de la certificación, cambia «me certifiqué con Google» por «me certifiqué con Google en Nombre de la certificación» -->
+        <p>Yo también empecé usando la IA sin saber bien dónde aplicarla. Desde noviembre de 2022 aprendí probando, me certifiqué con Google gracias a una beca de un programa del gobierno, y lo primero que resolví fueron problemas de mi propio negocio. Después vinieron las clases y, con ellas, los negocios que me buscaron con un problema concreto.</p>
+        <p>Soy Santiago, y sigo empezando por mis propios problemas. Este sitio es el más reciente: lo estoy construyendo en público, con cada decisión a la vista, para que veas cómo trabajo antes de contarme tu caso.</p>
+        <a class="text-link" href="/proximamente/">Sigue la construcción del sitio →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · PREGUNTAS FRECUENTES -->
+  <section class="sec sec-alt" aria-labelledby="faq-title">
+    <div class="wrap faq-grid">
+      <h2 class="h2" id="faq-title">Lo que más me preguntan</h2>
+      <div class="faq-list">
+        <details class="faq">
+          <summary>¿Cómo funciona?</summary>
+          <p>Son tres fases: diagnóstico, construcción y formación. Primero entiendo tu problema y mido cuánto te cuesta, después construyo la solución y al final te enseño a usarla.</p>
+          <p><a class="text-link" href="#proceso">Mira cómo trabajo →</a></p>
+        </details>
+        <details class="faq">
+          <summary>¿Cuántas horas son?</summary>
+          <p>Depende de lo que busques. Las clases de IA son 5 sesiones de una hora y media, en 5 días hábiles. En un proyecto, el tiempo depende del problema: la construcción toma desde 15 días hábiles. Un asistente de IA puede quedar cerca de ese mínimo, y una aplicación que pasa por varias versiones, cerca de dos meses.</p>
+        </details>
+        <details class="faq">
+          <summary>¿Qué precio tiene?</summary>
+          <p>Un proyecto empieza en 1.600.000 COP, y cada fase tiene su precio: el diagnóstico cuesta 400.000 y la construcción, desde 1.200.000. Después del diagnóstico te doy un precio cerrado para la construcción, antes de empezar. La primera conversación por WhatsApp no tiene costo: ahí vemos si tiene sentido seguir. El diagnóstico se paga aunque después decidas no construir nada, porque cubre el tiempo y el criterio para decirte qué conviene.</p>
+        </details>
+        <details class="faq">
+          <summary>¿Tengo que saber programar?</summary>
+          <p>No. Yo construyo la solución y te enseño a usarla. Lo que necesitas saber es cómo se hace hoy la tarea, y eso ya lo sabes.</p>
+        </details>
+        <details class="faq">
+          <summary>¿Y si mi problema no necesita IA?</summary>
+          <p>Te lo digo en el diagnóstico. A veces conviene un software sencillo, y a veces basta con quitar o simplificar pasos. De los dos casos que muestro en esta página, uno se resolvió sin IA.</p>
+        </details>
+        <details class="faq">
+          <summary>¿Esto reemplaza a alguien de mi equipo?</summary>
+          <p>Lo que construyo se encarga de la parte repetitiva de una tarea. Las decisiones siguen siendo tuyas o de tu equipo: en el caso de reclutamiento, el asistente calcula qué tanto encaja cada candidato, y las personas deciden.</p>
+        </details>
+        <details class="faq">
+          <summary>Apenas estamos probando la IA. ¿Esto es para nosotros?</summary>
+          <p>Sí. Es justo lo que me dicen varios clientes al empezar. El diagnóstico parte de cómo hacen hoy la tarea, sin importar cuánto sepan de IA.</p>
+        </details>
+        <details class="faq">
+          <summary>¿Qué me enseñas?</summary>
+          <p>A usar en tu día a día la solución que construí: cómo funciona y cómo manejarla, en sesiones por videollamada. Si lo que buscas es aprender IA sin construir nada, también doy clases: 5 sesiones de una hora y media, en 5 días hábiles.</p>
+          <p><a class="text-link" href="/proximamente/">Ver las clases →</a></p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · LLAMADO FINAL -->
+  <section class="closing" aria-labelledby="close-title">
+    <div class="closing-art closing-art-l" data-halftone="frame-l" data-src="/img/cierre.webp" aria-hidden="true"></div>
+    <div class="closing-art closing-art-r" data-halftone="frame-r" aria-hidden="true"></div>
+    <div class="wrap closing-inner">
+      <h2 class="closing-title" id="close-title">¿Tienes una tarea en mente, o todavía no sabes por dónde empezar?</h2>
+      <p class="closing-lead">Si ya decidiste trabajar conmigo, o si te quedan preguntas, cuéntame tu caso.</p>
+      <div class="actions actions-center">
+        <a class="btn btn-primary" href="#" data-wa="w1" target="_blank" rel="noopener">
+          <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+          Tengo una tarea en mente
+        </a>
+        <a class="btn btn-on-dark" href="#" data-wa="w2" target="_blank" rel="noopener">
+          <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+          Todavía no sé por dónde empezar
+        </a>
+      </div>
+      <p class="closing-mail">¿Prefieres correo? Escríbeme a <a href="mailto:withoutmasterslab@proton.me">withoutmasterslab@proton.me</a>.</p>
+    </div>
+  </section>
+</main>
+
+<!-- 11 · PIE DE PÁGINA -->
+<footer class="site-foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-mark">WMLab</p>
+      <p class="foot-desc">Asesoro a negocios en IA y automatización. Trabajo desde Colombia.</p>
+    </div>
+    <div>
+      <p class="foot-h">Contacto</p>
+      <p>WhatsApp: <a href="https://wa.me/573003651080" target="_blank" rel="noopener">+57 300 365 1080</a></p>
+      <p>Correo: <a href="mailto:withoutmasterslab@proton.me">withoutmasterslab@proton.me</a></p>
+    </div>
+    <div>
+      <p class="foot-h">Redes</p>
+      <!-- PENDIENTE: pega las direcciones de tus perfiles en los href -->
+      <p><a href="https://www.linkedin.com/" data-pending-url>LinkedIn</a> · <a href="https://www.instagram.com/" data-pending-url>Instagram</a> · <a href="https://github.com/WithoutMastersLab">GitHub</a></p>
+      <p><a class="text-link" href="/proximamente/">Sigue la construcción del sitio →</a></p>
+    </div>
+  </div>
+  <div class="wrap foot-legal">
+    <p><a href="/proximamente/">Política de tratamiento de datos</a> · <a href="/proximamente/">Aviso de privacidad</a></p>
+    <p>© 2026 WMLab</p>
+  </div>
+</footer>
+
+<!-- S1 · SELECTOR -->
+<dialog class="sheet" id="selector" aria-labelledby="sheet-title">
+  <div class="sheet-grip" aria-hidden="true"></div>
+  <h2 class="sheet-title" id="sheet-title">¿Cómo quieres empezar?</h2>
+  <div class="sheet-options">
+    <a class="btn btn-primary btn-block" href="#" data-wa="w1" target="_blank" rel="noopener">
+      <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+      Tengo una tarea en mente
+    </a>
+    <a class="btn btn-secondary btn-block" href="#" data-wa="w2" target="_blank" rel="noopener">
+      <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>
+      Todavía no sé por dónde empezar
+    </a>
+  </div>
+  <p class="sheet-note">Las dos abren WhatsApp con un mensaje listo para completar.</p>
+  <button class="link-btn sheet-close" type="button" data-close-selector>Cerrar</button>
+</dialog>
+
+<!-- M6 · Aviso si WhatsApp no se abre -->
+<div class="toast" id="toast" role="status" hidden>¿No se abrió WhatsApp? Escríbeme al +57 300 365 1080 o a withoutmasterslab@proton.me.</div>
+
+<!-- Ícono de WhatsApp (se reutiliza en todos los botones) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></symbol>
+</svg>
+
+<script src="/main.js" defer></script>
 </body>
 </html>

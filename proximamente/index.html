@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>wml — próximamente</title>
+<meta name="description" content="IA aplicada a negocios reales. Sitio en construcción.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="wml — próximamente">
+<meta property="og:description" content="IA aplicada a negocios reales. Sitio en construcción.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000'/%3E%3Crect x='6' y='9' width='20' height='2' fill='%23fff' opacity='.35'/%3E%3Crect x='6' y='14' width='20' height='6' fill='%235C5BEE'/%3E%3Crect x='6' y='20' width='9' height='3' fill='%23EEFF22'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  /* ── STRATA tokens ───────────────────────────── */
+  :root {
+    --black:  #000000;          /* 60 · dominante */
+    --white:  #FFFFFF;          /* 30 · texto */
+    --purple: #5C5BEE;          /* acento editorial */
+    --yellow: #EEFF22;          /* 10 · chispa */
+    --deep:   #0E0D30;          /* morado profundo, base de la textura */
+    --mute:   rgba(255,255,255,.56);
+    --gutter: clamp(16px, 5vw, 64px);
+    --sans:  "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --ease:  cubic-bezier(.2,.7,.2,1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+
+  ::selection { background: var(--yellow); color: var(--black); }
+
+  /* ── Cabecera ────────────────────────────────── */
+  header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--gutter) var(--gutter) 0;
+  }
+  .mark {
+    font-weight: 600;
+    font-size: 1.375rem;
+    letter-spacing: -.045em;
+  }
+  .meta {
+    font-size: .75rem;
+    letter-spacing: .08em;
+    color: var(--mute);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Mensaje ─────────────────────────────────── */
+  main {
+    position: relative;
+    z-index: 2;
+    align-self: center;
+    padding: 0 var(--gutter);
+    margin-bottom: 22vh;            /* sube el bloque para que flote sobre la textura */
+    animation: rise 1.1s var(--ease) both;
+  }
+  h1 {
+    font-weight: 500;
+    font-size: clamp(3.25rem, 13vw, 12.5rem);
+    line-height: .9;
+    letter-spacing: -.06em;
+    margin-left: -.04em;            /* compensa el lado izquierdo de la "p" a gran tamaño */
+  }
+  .dot {
+    display: inline-block;
+    width: .13em; height: .13em;
+    margin-left: .05em;
+    border-radius: 50%;
+    background: var(--yellow);
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+  .tagline {
+    margin-top: clamp(16px, 2.4vw, 32px);
+    font-size: clamp(1.375rem, 3.2vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -.03em;
+    font-weight: 400;
+  }
+  .tagline em {
+    font-family: var(--serif);
+    font-style: italic;
+    letter-spacing: -.01em;
+    color: var(--purple);
+  }
+
+  /* ── Profundidad: textura que sube desde abajo ── */
+  .depth {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    height: 46vh;
+    height: 46svh;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(to top, var(--deep) 0%, rgba(18,17,58,.5) 40%, transparent 85%);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, #000 22%, rgba(0,0,0,.5) 58%, transparent 100%);
+            mask-image: linear-gradient(to top, #000 0%, #000 22%, rgba(0,0,0,.5) 58%, transparent 100%);
+  }
+  .layer {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: -15%;
+    width: 130%;
+    will-change: transform;
+  }
+  .layer svg { display: block; width: 100%; height: 100%; }
+  .far  { animation: drift 40s ease-in-out infinite alternate; }
+  .near { animation: drift 28s ease-in-out infinite alternate-reverse; opacity: .85; }
+
+  .grain {
+    position: absolute;
+    inset: -20% 0 0 0;
+    opacity: .55;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+  }
+
+  /* ── Movimiento ──────────────────────────────── */
+  @keyframes rise  { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes drift { from { transform: translateX(-5%); } to { transform: translateX(5%); } }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(238,255,34,.45); }
+    50%      { box-shadow: 0 0 0 .08em rgba(238,255,34,0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <span class="mark">wml</span>
+    <span class="meta">2026</span>
+  </header>
+
+  <main>
+    <h1>próximamente<span class="dot" aria-hidden="true"></span></h1>
+    <p class="tagline">IA aplicada <em>a negocios reales.</em></p>
+  </main>
+
+  <div class="depth" aria-hidden="true">
+    <!-- capa lejana: vetas moradas, desenfoque horizontal fuerte -->
+    <div class="layer far">
+      <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <filter id="farF" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.0014 0.016" numOctaves="3" seed="7"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0.36  0 0 0 0 0.357  0 0 0 0 0.933  2.4 0 0 0 -1.05"/>
+          <feGaussianBlur stdDeviation="48 9"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#farF)"/>
+      </svg>
+    </div>
+    <!-- capa cercana: destellos lavanda, se mueve en sentido contrario -->
+    <div class="layer near">
+      <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <filter id="nearF" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.0024 0.028" numOctaves="3" seed="23"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0.76  0 0 0 0 0.76  0 0 0 0 1  3.2 0 0 0 -1.9"/>
+          <feGaussianBlur stdDeviation="60 6"/>
+        </filter>
+        <rect width="100%" height="100%" filter="url(#nearF)"/>
+      </svg>
+    </div>
+    <!-- grano tipo película, encima de todo -->
+    <div class="grain"></div>
+  </div>
+
+</body>
+</html>

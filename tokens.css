@@ -1,0 +1,185 @@
+/* ==========================================================================
+   WMLab · STRATA · tokens del modo Editorial
+   Versión 0.1 · 23 de octubre de 2026
+
+   Tres capas (método de Wikimedia Codex):
+   1. Opciones: todos los valores posibles. Nunca se usan directo en una pieza.
+   2. Decisiones: qué opción se usa para qué. Un modo nuevo (Terminal) solo
+      reescribe esta capa.
+   3. Componentes: los valores de cada pieza. Siempre apuntan a una decisión.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. OPCIONES
+   -------------------------------------------------------------------------- */
+:root {
+  /* Color */
+  --opt-ink-900: #303030;
+  --opt-ink-600: #5E5E5E;
+  --opt-paper-100: #F4F4F4;
+  --opt-paper-50: #FBFBFB;
+  --opt-white: #FFFFFF;
+  --opt-sage-400: #A9AD93;
+  --opt-violet-500: #5C5BEE;
+  --opt-acid-300: #EEFF22;
+
+  /* Tipografía */
+  --opt-font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --opt-font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --opt-font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --opt-weight-regular: 400;
+  --opt-weight-medium: 500;
+  --opt-weight-semibold: 600;
+  --opt-weight-bold: 700;
+  --opt-weight-heavy: 800;
+
+  /* Escala tipográfica: base 16 px, razón 1,2 en celular */
+  --opt-step--1: 0.833rem;
+  --opt-step-0: 1rem;
+  --opt-step-1: 1.2rem;
+  --opt-step-2: 1.44rem;
+  --opt-step-3: 1.728rem;
+  --opt-step-4: 2.074rem;
+  --opt-step-5: 2.488rem;
+  --opt-step-6: 2.986rem;
+
+  /* Espaciado: retícula de 4 pt */
+  --opt-space-1: 4px;
+  --opt-space-2: 8px;
+  --opt-space-3: 12px;
+  --opt-space-4: 16px;
+  --opt-space-6: 24px;
+  --opt-space-8: 32px;
+  --opt-space-12: 48px;
+  --opt-space-16: 64px;
+  --opt-space-24: 96px;
+  --opt-space-32: 128px;
+
+  --opt-radius-0: 0;
+  --opt-radius-1: 2px;
+  --opt-radius-pill: 999px;
+
+  --opt-line-1: 1px;
+  --opt-line-2: 2px;
+}
+
+/* Escala tipográfica: razón 1,333 en escritorio */
+@media (min-width: 900px) {
+  :root {
+    --opt-step--1: 0.75rem;
+    --opt-step-0: 1rem;
+    --opt-step-1: 1.333rem;
+    --opt-step-2: 1.777rem;
+    --opt-step-3: 2.369rem;
+    --opt-step-4: 3.157rem;
+    --opt-step-5: 4.209rem;
+    --opt-step-6: 5.61rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. DECISIONES · modo Editorial (por defecto)
+   Contraste verificado (WCAG): ver style-tile.html
+   -------------------------------------------------------------------------- */
+:root,
+[data-mode="editorial"] {
+  /* Superficies */
+  --color-bg: var(--opt-paper-50);
+  --color-bg-alt: var(--opt-paper-100);
+  --color-block-bg: var(--opt-ink-900);        /* bloque de contrapeso */
+
+  /* Texto */
+  --color-text: var(--opt-ink-900);            /* 12,75:1 sobre fondo */
+  --color-text-muted: var(--opt-ink-600);      /* 6,27:1 sobre fondo */
+  --color-block-text: var(--opt-paper-50);     /* 12,75:1 sobre bloque */
+  --color-block-muted: var(--opt-sage-400);    /* 5,71:1 sobre bloque */
+
+  /* Acento: solo funcional, en dosis mínima */
+  --color-accent: var(--opt-violet-500);
+  --color-on-accent: var(--opt-white);         /* 5,02:1 */
+  --color-urgent: var(--opt-acid-300);         /* solo sobre el bloque oscuro: 11,92:1 */
+
+  /* Líneas, foco y textura */
+  --color-line: var(--opt-ink-900);
+  --color-line-soft: #D6D6D6;
+  --color-focus: var(--opt-violet-500);
+  --color-texture: var(--opt-ink-900);
+  --color-texture-accent: var(--opt-violet-500);
+
+  /* Roles tipográficos */
+  --font-display: var(--opt-font-sans);
+  --font-body: var(--opt-font-sans);
+  --font-subtitle: var(--opt-font-serif);      /* Newsreader Italic: subtítulos, nunca titulares */
+  --font-label: var(--opt-font-mono);          /* IBM Plex Mono: solo etiquetas pequeñas */
+
+  --weight-display: var(--opt-weight-heavy);
+  --weight-heading: var(--opt-weight-bold);
+  --weight-body: var(--opt-weight-regular);
+  --weight-strong: var(--opt-weight-semibold);
+
+  --text-display: var(--opt-step-6);
+  --text-h2: var(--opt-step-4);
+  --text-h3: var(--opt-step-2);
+  --text-subtitle: var(--opt-step-2);
+  --text-body: var(--opt-step-0);
+  --text-label: var(--opt-step--1);
+
+  --leading-display: 0.98;
+  --leading-heading: 1.1;
+  --leading-body: 1.6;
+  --leading-subtitle: 1.35;
+  --tracking-display: -0.035em;
+  --tracking-label: 0.02em;
+
+  /* Espacio */
+  --gutter: var(--opt-space-4);                /* margen lateral en celular */
+  --section-gap: var(--opt-space-16);
+  --measure: 38rem;                            /* largo de línea máximo, < 80 caracteres */
+}
+
+@media (min-width: 900px) {
+  :root,
+  [data-mode="editorial"] {
+    --gutter: var(--opt-space-12);
+    --section-gap: var(--opt-space-32);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. COMPONENTES
+   -------------------------------------------------------------------------- */
+:root {
+  /* Botón principal: «Cuéntame tu caso» */
+  --btn-primary-bg: var(--color-accent);
+  --btn-primary-text: var(--color-on-accent);
+  --btn-primary-radius: var(--opt-radius-pill);
+
+  /* Botón secundario: «Mira cómo trabajo», «Ver las clases» */
+  --btn-secondary-bg: transparent;
+  --btn-secondary-text: var(--color-text);
+  --btn-secondary-border: var(--color-line);
+  --btn-secondary-radius: var(--opt-radius-pill);
+
+  --btn-height: 48px;                          /* objetivo táctil mínimo de 44 px */
+  --btn-pad-x: var(--opt-space-6);
+
+  /* Campo de formulario: solo línea inferior */
+  --field-line: var(--color-line);
+  --field-line-width: var(--opt-line-1);
+  --field-line-focus: var(--color-focus);
+  --field-label: var(--color-text-muted);
+  --field-help: var(--color-text-muted);
+  --field-error: var(--color-text);            /* el error se marca con texto, no con rojo */
+
+  /* Tarjetas (fases, caminos, casos) */
+  --card-bg: transparent;
+  --card-border: var(--color-line);
+  --card-radius: var(--opt-radius-0);
+
+  /* Pregunta desplegable */
+  --faq-line: var(--color-line-soft);
+
+  /* Textura de puntos */
+  --dot-cell: 9px;
+}

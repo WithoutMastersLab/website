@@ -1,0 +1,8 @@
+Aquí van las imágenes del home. Con estos nombres exactos, el sitio las usa solo;
+si un archivo no está, el sitio dibuja la textura de puntos en su lugar.
+
+hero.webp        horizontal, mínimo 1600 x 1000 px, lo importante hacia un costado
+cierre.webp      horizontal, mínimo 1600 x 1000 px, centro despejado para el texto
+quien-soy.webp   vertical 4:5, mínimo 880 x 1100 px
+
+Peso ideal: menos de 300 KB cada una.
